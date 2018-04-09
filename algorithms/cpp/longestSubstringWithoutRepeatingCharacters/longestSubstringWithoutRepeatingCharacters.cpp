@@ -1,6 +1,6 @@
 // Source : https://oj.leetcode.com/problems/longest-substring-without-repeating-characters/
-// Author : Hao Chen
-// Date   : 2014-07-19
+// Author : Longquan Liu
+// Date   : 2018-04-09
 
 /********************************************************************************** 
 * 
@@ -25,21 +25,25 @@ using namespace std;
  * Then we can take out the previous duplicated char, and keep tracking the maxiumn length. 
  * 
  */
-int lengthOfLongestSubstring1(string s) {
-    map<char, int> m;
-    int maxLen = 0;
-    int lastRepeatPos = -1;
-    for(int i=0; i<s.size(); i++){
-        if (m.find(s[i])!=m.end() && lastRepeatPos < m[s[i]]) {
-            lastRepeatPos = m[s[i]];
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        std::map<char, int> mymap;
+        int maxLen = 0;
+        int lastRepeatPos = -1;
+        for(int i = 0; i < s.size(); i++){
+            if(mymap.find(s[i]) != mymap.end() && lastRepeatPos < mymap[s[i]]){       // if s[i] already in the substring, update the lastRepeatPos
+                lastRepeatPos = mymap[s[i]];
+            }
+            if(i - lastRepeatPos > maxLen){                                           // if current substring length larger than maxLen, update
+                maxLen = i - lastRepeatPos;
+            }
+            mymap[s[i]] = i;                                                          // add current element to HashMap
         }
-        if ( i - lastRepeatPos > maxLen ){
-            maxLen = i - lastRepeatPos;
-        }
-        m[s[i]] = i;
+        return maxLen;
     }
-    return maxLen;
-}
+        
+};
 //don't use <map>
 int lengthOfLongestSubstring(string s) {
     const int MAX_CHARS = 256;
