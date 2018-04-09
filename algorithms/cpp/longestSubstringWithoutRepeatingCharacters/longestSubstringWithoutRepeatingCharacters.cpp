@@ -16,6 +16,7 @@
 #include <map>
 using namespace std;
 /*
+ * Keywords: sliding windows, hash map
  * Idea:
  * 
  * Using a map store each char's index.
