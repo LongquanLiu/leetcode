@@ -32,13 +32,16 @@ public:
         int maxLen = 0;
         int lastRepeatPos = -1;
         for(int i = 0; i < s.size(); i++){
-            if(mymap.find(s[i]) != mymap.end() && lastRepeatPos < mymap[s[i]]){       // if s[i] already in the substring, update the lastRepeatPos
+            if(mymap.find(s[i]) != mymap.end() && lastRepeatPos < mymap[s[i]]){       
+                // if s[i] already in the substring, update the lastRepeatPos
                 lastRepeatPos = mymap[s[i]];
             }
-            if(i - lastRepeatPos > maxLen){                                           // if current substring length larger than maxLen, update
+            if(i - lastRepeatPos > maxLen){                                           
+                // if current substring length larger than maxLen, update
                 maxLen = i - lastRepeatPos;
             }
-            mymap[s[i]] = i;                                                          // add current element to HashMap
+            mymap[s[i]] = i;                                                          
+            // add current element to HashMap
         }
         return maxLen;
     }
